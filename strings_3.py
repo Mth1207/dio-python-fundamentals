@@ -1,9 +1,10 @@
-frase = "Andei até cansar"
+nome = "Guilherme Arthur de Carvalho"
 
-print(frase[0])
-print(frase[:9])
-print(frase[10:])
-print(frase[10:16])
-print(frase[10:16:2])
-print(frase[:])
-print(frase[:: -1])
+print(nome[0])
+print(nome[:9])  # 9 - 1 = retornará o 8 nesse caso o "e"
+print(nome[10:]) # pegará a partir do 10 em diante
+print(nome[10:16])
+print(nome[10:16:2])
+print(nome[:])
+print(nome[:: -1])
+print(nome[-1]) # retorna o último caractere
