@@ -53,3 +53,101 @@ def exibir_poema(data_extenso, *args, **kwargs):
     print(mensagem)
     
 exibir_poema("Sexta, 26 ago 22", "Zen of Python", "Beautiful is better than ugly.", autor="Tim Peters", ano=1999)
+
+####################################################
+"""
+---------------
+SINTAXE DE PARÂMETROS
+
+def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
+       .........     ..........     ..........
+        |                                 |
+        |       Positional or keyword     |  
+        |                                 |
+         -- Positional only               - keyword only
+
+---------------
+"""
+
+####################################################
+
+# Positional Only
+def criar_carro(modelo, ano, placa, /, marca, motor, combustivel):
+    print(modelo, ano, placa, marca, motor, combustivel)
+    
+
+criar_carro("Palio", 1999, "ABC-1234", marca="Fiat", motor="1.0", combustivel="Gasolina") # Esta chamada é válida, seguindo as orientações do Positional only
+
+# criar_carro(modelo="Palio", ano=1999, placa="ABC-1234", marca="Fiat", motor="1.0", combustivel="Gasolina") # chamada inválida!
+
+####################################################
+
+# Keyword Only
+def criar_carro(*, modelo, ano, placa, marca, motor, combustivel):
+    print(modelo, ano, placa, marca, motor, combustivel)
+    
+criar_carro(modelo="Palio", ano=1999, placa="ABC-1234", marca="Fiat", motor="1.0", combustivel="Gasolina") # Válida porque queremos que sejam passados as palavras como parâmetros
+
+# criar_carro("Palio", 1999, "ABC-1234", marca="Fiat", motor="1.0", combustivel="Gasolina") # Inválido!!
+
+####################################################
+
+# Keyword and positional only
+def criar_carro(modelo, ano, placa, /, *, marca, motor, combustivel):
+    print(modelo, ano, placa, marca, motor, combustivel)
+    
+criar_carro("Palio", 1999, "ABC-1234", marca="Fiat", motor="1.0", combustivel="Gasolina") # Válido
+
+# criar_carro(modelo="Palio", ano=1999, placa="ABC-1234", marca="Fiat", motor="1.0", combustivel="Gasolina") # chamada inválida!
+
+####################################################
+
+# OBJETOS DE PRIMEIRA CLASSE
+def somar(a, b):
+    return a + b
+
+def subtrair(a, b):
+    return a - b
+
+def exibir_resultado(a, b, funcao):
+    resultado = funcao(a, b)
+    print(f"O resultado da operação é = {resultado}")
+    
+exibir_resultado(10, 10, somar)
+exibir_resultado(10, 10, subtrair)
+
+op = somar
+print(op(1, 23))
+
+####################################################
+
+# ESCOPO DE VARIAVEIS
+#Exemplo:
+salario = 2000
+
+def salario_bonus(bonus):
+    global salario
+    salario += bonus
+    return salario
+
+print(salario_bonus(500))
+
+#####
+
+def salario_bonus_2(bonus, lista):
+    global salario
+    
+    lista_aux = lista.copy()
+    lista_aux.append(2)
+    print(f"lista aux = {lista_aux}")
+    
+    salario += bonus
+    return salario
+
+lista = [1]
+salario_com_bonus = salario_bonus_2(500, lista)
+print(salario_com_bonus)
+print(lista)
+
+####################################################
+
